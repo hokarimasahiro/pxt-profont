@@ -112,7 +112,7 @@ namespace profont {
      */
     //% block
     export function showDate(m: number, d: number): void {
-        showString(m.toString() + "\nb" + (d < 10 ? "0" : "") + d.toString() + "c\b")
+        showString(m.toString() + "\nb" + (d < 10 ? "0" : "") + d.toString() + "a\b")
     }
     /**
      * TODO:曜日を表示する
@@ -211,6 +211,27 @@ namespace profont {
     //% block
     export function setShift(s: number): void {
         kanaShift = s
+    }
+    /**
+     * TODO:英字シフトコード
+     */
+    //% block
+    export function shiftAlfa(): string {
+        return "\b"
+    }
+    /**
+     * TODO:カナシフトコード
+     */
+    //% block
+    export function shiftKana(): string {
+        return "\t"
+    }
+    /**
+     * TODO:漢字シフトコード
+     */
+    //% block
+    export function shiftKanji(): string {
+        return "\n"
     }
     /**
      * TODO: 2桁の数値を表示する
