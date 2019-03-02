@@ -3,6 +3,11 @@
  */
 //% weight=100 color=#0fbc11 icon="\u270f" block="Proportional Font"
 namespace profont {
+    declare const enum mojiSHift {
+        Alfa = 0,
+        Kana = 1,
+        Kanji = 2
+    }
     let rotate: number = 0
     let scroleSpeed: number = 200
     let yose: number = -1
@@ -25,11 +30,11 @@ namespace profont {
             charCode = pStr.charCodeAt(i) & 0xff
             if ((charCode >= 0x20) && (charCode <= 0x5f))
                 Font = trim(AlfaFont.substr((charCode - 0x20) * 5, 5));
-            else if ((kanaShift == 0) && (charCode >= 0x60) && (charCode <= 0x7e))
+            else if ((kanaShift == mojiSHift.Alfa) && (charCode >= 0x60) && (charCode <= 0x7e))
                 Font = trim(AlfaFont.substr((charCode - 0x20) * 5, 5));
-            else if ((kanaShift == 1) && (charCode >= 0x60) && (charCode <= 0xa0))
+            else if ((kanaShift == mojiSHift.Kana) && (charCode >= 0x60) && (charCode <= 0xa0))
                 Font = trim(KanaFont.substr((charCode - 0x60) * 5, 5));
-            else if ((kanaShift == 2) && (charCode >= 0x60) && (charCode <= 0x6f))
+            else if ((kanaShift == mojiSHift.Kanji) && (charCode >= 0x60) && (charCode <= 0x6f))
                 Font = trim(KanjiFont.substr((charCode - 0x60) * 5, 5));
             else
                 Font = ""
@@ -53,14 +58,14 @@ namespace profont {
                 }
             } else {
                 switch (pStr.charCodeAt(i)) {
-                    case 0x08:	// \b
-                        kanaShift = 0
+                    case "\b".charCodeAt(0):	// \b
+                        kanaShift = mojiSHift.Alfa
                         break
-                    case 0x09:	// \t
-                        kanaShift = 1
+                    case "\t".charCodeAt(0):	// \t
+                        kanaShift = mojiSHift.Kana
                         break
-                    case 0x0a:	// \n
-                        kanaShift = 2
+                    case "\n".charCodeAt(0):	// \n
+                        kanaShift = mojiSHift.Kanji
                         break
                     case 0x0b:	// \v
                     case 0x0c:	// \f
@@ -218,8 +223,21 @@ namespace profont {
      * @param s 数値。, eg: 0
      */
     //% block
-    export function setShift(s: number): void {
-        kanaShift = s
+    export function setShift(s: string): void {
+        switch (s.charCodeAt(0)) {
+            case "\b".charCodeAt(0):	// \b
+                kanaShift = mojiSHift.Alfa
+                break
+            case "\t".charCodeAt(0):	// \t
+                kanaShift = mojiSHift.Kana
+                break
+            case "\n".charCodeAt(0):	// \n
+                kanaShift = mojiSHift.Kanji
+                break
+            case 0x0b:	// \v
+            case 0x0c:	// \f
+            case 0x0d:	// \r
+        }
     }
     /**
      * TODO:英字シフトコード
