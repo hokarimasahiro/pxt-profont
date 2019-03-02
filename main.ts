@@ -232,7 +232,7 @@ namespace profont {
     }
     /**
      * TODO:文字シフトを変更する
-     * @param s シフトコード。, eg: ShiftAlfa()
+     * @param s シフトコード。, eg: \b
      */
     //% blockId="set Shiftmode" block="set Shiftmode %s"
     //% weight=84 blockGap=8
