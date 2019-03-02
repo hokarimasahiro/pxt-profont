@@ -58,18 +58,15 @@ namespace profont {
                 }
             } else {
                 switch (pStr.charCodeAt(i)) {
-                    case "\b".charCodeAt(0):	// \b
+                    case shiftAlfa().charCodeAt(0):	// \b
                         kanaShift = mojiSHift.Alfa
                         break
-                    case "\t".charCodeAt(0):	// \t
+                    case shiftKana().charCodeAt(0):	// \t
                         kanaShift = mojiSHift.Kana
                         break
-                    case "\n".charCodeAt(0):	// \n
+                    case shiftKanji().charCodeAt(0):	// \n
                         kanaShift = mojiSHift.Kanji
                         break
-                    case 0x0b:	// \v
-                    case 0x0c:	// \f
-                    case 0x0d:	// \r
                 }
             }
         }
@@ -126,7 +123,10 @@ namespace profont {
      */
     //% block
     export function showDate(m: number, d: number): void {
-        showString(m.toString() + "\nb" + (d < 10 ? "0" : "") + d.toString() + "a\b")
+        let svSHift=getShift()
+        setShift(shiftKanji())  // 漢字モードにする
+        showString(m.toString() + "b" + (d < 10 ? "0" : "") + d.toString() + "a")
+        setShift(svSHift)  // シフト状態を元に戻す
     }
     /**
      * TODO:曜日を表示する
@@ -225,19 +225,31 @@ namespace profont {
     //% block
     export function setShift(s: string): void {
         switch (s.charCodeAt(0)) {
-            case "\b".charCodeAt(0):	// \b
+            case shiftAlfa().charCodeAt(0):	// \b
                 kanaShift = mojiSHift.Alfa
                 break
-            case "\t".charCodeAt(0):	// \t
+            case shiftKana().charCodeAt(0):	// \t
                 kanaShift = mojiSHift.Kana
                 break
-            case "\n".charCodeAt(0):	// \n
+            case shiftKanji().charCodeAt(0):	// \n
                 kanaShift = mojiSHift.Kanji
                 break
-            case 0x0b:	// \v
-            case 0x0c:	// \f
-            case 0x0d:	// \r
         }
+    }
+    /**
+     * TODO:文字シフトを取得する
+     */
+    //% block
+    export function getShift():string{
+        switch (kanaShift) {
+            case mojiSHift.Alfa:	// \b
+                return shiftAlfa()
+            case mojiSHift.Kana:	// \t
+                return shiftKana()
+            case mojiSHift.Kanji:	// \n
+                return shiftKanji()
+        }
+        return shiftAlfa()
     }
     /**
      * TODO:英字シフトコード
