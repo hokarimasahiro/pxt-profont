@@ -16,7 +16,8 @@ namespace profont {
      * TODO:文字列を表示する
      * @param pStr 文字列。, eg: "ABCDabcd"
      */
-    //% block
+    //% blockId="show String" block="show String %pStr"
+    //% weight=100 blockGap=8
     export function showString(pStr: string): void {
         const AlfaFont: string = "0    M    H0H  :O:O::MEG:IB49C:EE:1H    >A   A>   :4:  4>4  12   44   2    248  >A>  9O1  CE9  AE;  L4O  MEB  >E2  @CL  :E:  9E>  :    1:   4:A  ::   A:4  @E8  >AEB>?D?  OE:  >AA  OA>  OEA  OD@  >E6  O4O  AOA  2AN  O<C  O11  O8O  O>O  OAO  OD8  >C?  OD;  9EB  @O@  O1O  N1N  O2O  K4K  H7H  CEI  OA   842  AO   8@8  111  @8   7:7  O52  699  25O  >E9  4?D  9E:  O43  ;    11F  O25  N11  ?4?  ?87  696  ?:4  4:?  788  5=:  4?5  >1?  >1>  ?2?  969  =3<  ;=9  4OA  O    AO4  4848 0    "
         const KanaFont: string = "0    252  N@@  11?  21   04   @EEN 8?:< 1278 4=6  575  56?4 4?46 5571 EEO  4524 4444 AFDH 44?@ <I>  AOA  9:O8 9N9> :O:  8ABL 4I>8 AAAO 8M9N8EE2L ABDJA8N9= @92L 9IFL 5END HI1N 5EF4 O42  99N8 1AA1 AEBM 9:K:=112L 1N0L3N999 AABL 6842 ;8O8;DBEH EEE1 3=A531:4J DOEE 8O:< AAO1 EEEO EEEF L11N O0O2 O124 OAAO HAAN AA2L HH   8D8  "
@@ -94,16 +95,17 @@ namespace profont {
      * スペースを取り除く
      */
     function trim(s: string): string {
-        for(let i=s.length-1;i>=0;i--){
-            if(s.substr(i,1)!=" ") return s.substr(0,i+1)
+        for (let i = s.length - 1; i >= 0; i--) {
+            if (s.substr(i, 1) != " ") return s.substr(0, i + 1)
         }
-        return s.substr(0,1)
+        return s.substr(0, 1)
     }
     /**
      * TODO:数字を表示する
      * @param n 数値。, eg: 500
      */
-    //% block
+    //% blockId="show Number" block="show Number %n"
+    //% weight=98 blockGap=8
     export function showNumber(n: number): void {
         showString(Math.roundWithPrecision(n, 2).toString())
     }
@@ -112,7 +114,8 @@ namespace profont {
      * @param h 時。, eg: 3
      * @param m 分。, eg: 26
      */
-    //% block
+    //% blockId="show Time" block="show Time %h:%m"
+    //% weight=96 blockGap=8
     export function showTime(h: number, m: number): void {
         showString(h.toString() + ":" + (m < 10 ? "0" : "") + m.toString())
     }
@@ -121,9 +124,10 @@ namespace profont {
      * @param m 月。, eg: 3
      * @param d 日。, eg: 14
      */
-    //% block
+    //% blockId="show Date" block="show Date %m月%d日"
+    //% weight=94 blockGap=8
     export function showDate(m: number, d: number): void {
-        let svSHift=getShift()
+        let svSHift = getShift()
         setShift(shiftKanji())  // 漢字モードにする
         showString(m.toString() + "b" + (d < 10 ? "0" : "") + d.toString() + "a")
         setShift(svSHift)  // シフト状態を元に戻す
@@ -132,9 +136,11 @@ namespace profont {
      * TODO:曜日を表示する
      * @param w 曜日。, eg: 3
      */
-    //% block
+    //% blockId="show Weekday" block="show Weekday %w"
+    //% weight=92 blockGap=8
     export function showWeekday(w: number): void {
         let weekday: string
+        let svShift = getShift()
         switch (w) {
             case 0:
                 weekday = "a"
@@ -159,13 +165,16 @@ namespace profont {
                 break
         }
         setYose(0)
-        showString("\n" + weekday + "\b")
+        setShift(shiftKanji())
+        showString(weekday)
+        setShift(svShift)
     }
     /**
      * TODO:スクリーンをスクロールする
      * @param n スクロール桁数。, eg: -1
      */
-    //% block
+    //% blockId="Shift Screen" block="Shift Screen %n"
+    //% weight=90 blockGap=8
     export function scrollScreen(n: number): void {
         if ((n <= -5) || (n >= 5)) {
             basic.clearScreen()
@@ -198,15 +207,17 @@ namespace profont {
      * TODO:回転方向を設定する
      * @param r 数値。, eg: -90
      */
-    //% block
-    export function setRotate(r: number): void {
+    //% blockId="set Rotatation" block="set Rotation %r"
+    //% weight=90 blockGap=8
+    export function setRotatation(r: number): void {
         rotate = r
     }
     /**
      * TODO:スクロール速度を設定する
      * @param ss 数値。, eg: 100
      */
-    //% block
+    //% blockId="set Scrole Speed" block="set Scrole Speed %ss"
+    //% weight=88 blockGap=8
     export function setScroleSpeed(ss: number): void {
         scroleSpeed = ss
     }
@@ -214,15 +225,17 @@ namespace profont {
      * TODO:寄せを設定する
      * @param y 数値。, eg: 0
      */
-    //% block
+    //% blockId="set Yose" block="set Yose %y"
+    //% weight=86 blockGap=8
     export function setYose(y: number): void {
         yose = 1
     }
     /**
      * TODO:文字シフトを変更する
-     * @param s 数値。, eg: 0
+     * @param s シフトコード。, eg: 0
      */
-    //% block
+    //% blockId="set Shiftmode" block="set Shiftmode %s"
+    //% weight=84 blockGap=8
     export function setShift(s: string): void {
         switch (s.charCodeAt(0)) {
             case shiftAlfa().charCodeAt(0):	// \b
@@ -239,8 +252,9 @@ namespace profont {
     /**
      * TODO:文字シフトを取得する
      */
-    //% block
-    export function getShift():string{
+    //% blockId="get Shiftmode" block="get Shiftmode"
+    //% weight=82 blockGap=8
+    export function getShift(): string {
         switch (kanaShift) {
             case mojiSHift.Alfa:	// \b
                 return shiftAlfa()
@@ -254,21 +268,24 @@ namespace profont {
     /**
      * TODO:英字シフトコード
      */
-    //% block
+    //% blockId="shiftAlfa" block="shiftAlfa"
+    //% weight=80 blockGap=8
     export function shiftAlfa(): string {
         return "\b"
     }
     /**
      * TODO:カナシフトコード
      */
-    //% block
+    //% blockId="shiftKana" block="shiftKana"
+    //% weight=80 blockGap=8
     export function shiftKana(): string {
         return "\t"
     }
     /**
      * TODO:漢字シフトコード
      */
-    //% block
+    //% blockId="shiftKanji" block="shiftKanji"
+    //% weight=78 blockGap=8
     export function shiftKanji(): string {
         return "\n"
     }
@@ -277,7 +294,7 @@ namespace profont {
      * @param n 表示する数値。, eg: 32
      */
     //% blockId="show number 2digits" block="show a number 2digitsr %n"
-    //% weight=100 blockGap=8
+    //% weight=60 blockGap=8
     export function showNumber2(n: number): void {
         const font: number[] = [1023, 31, 765, 703, 927, 951, 1015, 636, 891, 959]
         let dfont: number
@@ -325,8 +342,8 @@ namespace profont {
      * @param s 表示開始位置。, eg: 0
      * @param w 表示桁数。, eg: 4
      */
-    //% blockId="show_soroban_number" block="show a number %n start %s width %w"
-    //% weight=100 blockGap=8
+    //% blockId="show soroban number" block="show a number in soroban form %n start %s width %w"
+    //% weight=50 blockGap=8
     export function showSorobanNumber(n: number, s: number = 0, w: number = 5): void {
         let wn = Math.abs(n)
         for (let i = s + w - 1; i >= s; i--) {
