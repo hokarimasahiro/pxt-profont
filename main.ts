@@ -271,7 +271,7 @@ namespace profont {
     //% blockId="英小文字" block="英小文字"
     //% weight=80 blockGap=8
     export function shiftAlfa(): string {
-        return "\b"
+        return "\t"
     }
     /**
      * TODO:カナシフトコード
@@ -279,7 +279,7 @@ namespace profont {
     //% blockId="カタカナ" block="カタカナ"
     //% weight=80 blockGap=8
     export function shiftKana(): string {
-        return "\t"
+        return "\v"
     }
     /**
      * TODO:漢字シフトコード
@@ -287,7 +287,7 @@ namespace profont {
     //% blockId="shiftKanji" block="shiftKanji"
     //% weight=78 blockGap=8
     function shiftKanji(): string {
-        return "\n"
+        return "\f"
     }
     /**
      * TODO: 2桁の数値を表示する
@@ -369,7 +369,8 @@ namespace profont {
      * TODO:数値を16進形式で表示する
      * @param n 数値。, eg: 0xab30
      */
-    //% block
+    //% blockId="16進形式で数を表示" block="16進形式で数を表示 %n"
+    //% weight=40 blockGap=8
     export function showHex(n: number): void {
         for (let x = 0; x < 5; x++) {
             for (let y = 0; y < 4; y++) {
