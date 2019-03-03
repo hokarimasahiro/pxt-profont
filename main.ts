@@ -104,17 +104,17 @@ namespace profont {
      * TODO:数字を表示する
      * @param n 数値。, eg: 500
      */
-    //% blockId="show Number" block="show Number %n"
+    //% blockId="数を表示" block="数を表示 %n"
     //% weight=98 blockGap=8
     export function showNumber(n: number): void {
         showString(Math.roundWithPrecision(n, 2).toString())
     }
     /**
      * TODO:時刻を表示する
-     * @param h 時。, eg: 3
-     * @param m 分。, eg: 26
+     * @param h 時。, eg: 7
+     * @param m 分。, eg: 30
      */
-    //% blockId="show Time" block="show Time %h:%m"
+    //% blockId="時刻を表示" block="時刻を表示 %h:%m"
     //% weight=96 blockGap=8
     export function showTime(h: number, m: number): void {
         showString(h.toString() + ":" + (m < 10 ? "0" : "") + m.toString())
@@ -124,7 +124,7 @@ namespace profont {
      * @param m 月。, eg: 3
      * @param d 日。, eg: 14
      */
-    //% blockId="show Date" block="show Date %m月%d日"
+    //% blockId="日付を表示" block="日付を表示 %m月%d日"
     //% weight=94 blockGap=8
     export function showDate(m: number, d: number): void {
         let svSHift = getShift()
@@ -136,7 +136,7 @@ namespace profont {
      * TODO:曜日を表示する
      * @param w 曜日。, eg: 3
      */
-    //% blockId="show Weekday" block="show Weekday %w"
+    //% blockId="曜日を表示" block="曜日を表示 %w"
     //% weight=92 blockGap=8
     export function showWeekday(w: number): void {
         let weekday: string
@@ -173,9 +173,9 @@ namespace profont {
      * TODO:スクリーンをスクロールする
      * @param n スクロール桁数。, eg: -1
      */
-    //% blockId="Shift Screen" block="Shift Screen %n"
+    //% blockId="スクロールする" block="スクロールする %n"
     //% weight=90 blockGap=8
-    export function scrollScreen(n: number): void {
+    function scrollScreen(n: number): void {
         if ((n <= -5) || (n >= 5)) {
             basic.clearScreen()
             return
@@ -207,7 +207,7 @@ namespace profont {
      * TODO:回転方向を設定する
      * @param r 数値。, eg: -90
      */
-    //% blockId="set Rotatation" block="set Rotation %r"
+    //% blockId="回転方向" block="回転方向 %r"
     //% weight=90 blockGap=8
     export function setRotatation(r: number): void {
         rotate = r
@@ -216,7 +216,7 @@ namespace profont {
      * TODO:スクロール速度を設定する
      * @param ss 数値。, eg: 100
      */
-    //% blockId="set Scrole Speed" block="set Scrole Speed %ss"
+    //% blockId="スクロール速度" block="スクロール速度 %ss"
     //% weight=88 blockGap=8
     export function setScroleSpeed(ss: number): void {
         scroleSpeed = ss
@@ -225,7 +225,7 @@ namespace profont {
      * TODO:寄せを設定する
      * @param y 数値。, eg: 0
      */
-    //% blockId="set Yose" block="set Yose %y"
+    //% blockId="寄せ" block="寄せ %y"
     //% weight=86 blockGap=8
     export function setYose(y: number): void {
         yose = y
@@ -234,7 +234,7 @@ namespace profont {
      * TODO:文字シフトを変更する
      * @param s シフトコード。, eg: \b
      */
-    //% blockId="set Shiftmode" block="set Shiftmode %s"
+    //% blockId="文字種類" block="文字種類 %s"
     //% weight=84 blockGap=8
     export function setShift(s: string): void {
         switch (s.charCodeAt(0)) {
@@ -254,7 +254,7 @@ namespace profont {
      */
     //% blockId="get Shiftmode" block="get Shiftmode"
     //% weight=82 blockGap=8
-    export function getShift(): string {
+    function getShift(): string {
         switch (kanaShift) {
             case mojiSHift.Alfa:	// \b
                 return shiftAlfa()
@@ -268,7 +268,7 @@ namespace profont {
     /**
      * TODO:英字シフトコード
      */
-    //% blockId="shiftAlfa" block="shiftAlfa"
+    //% blockId="英小文字" block="英小文字"
     //% weight=80 blockGap=8
     export function shiftAlfa(): string {
         return "\b"
@@ -276,7 +276,7 @@ namespace profont {
     /**
      * TODO:カナシフトコード
      */
-    //% blockId="shiftKana" block="shiftKana"
+    //% blockId="カタカナ" block="カタカナ"
     //% weight=80 blockGap=8
     export function shiftKana(): string {
         return "\t"
@@ -286,14 +286,14 @@ namespace profont {
      */
     //% blockId="shiftKanji" block="shiftKanji"
     //% weight=78 blockGap=8
-    export function shiftKanji(): string {
+    function shiftKanji(): string {
         return "\n"
     }
     /**
      * TODO: 2桁の数値を表示する
      * @param n 表示する数値。, eg: 32
      */
-    //% blockId="show number 2digits" block="show a number 2digitsr %n"
+    //% blockId="2桁の数を表示" block="2桁の数を表示 %n"
     //% weight=60 blockGap=8
     export function showNumber2(n: number): void {
         const font: number[] = [1023, 31, 765, 703, 927, 951, 1015, 636, 891, 959]
@@ -342,7 +342,7 @@ namespace profont {
      * @param s 表示開始位置。, eg: 0
      * @param w 表示桁数。, eg: 4
      */
-    //% blockId="show soroban number" block="show a number in soroban form %n start %s width %w"
+    //% blockId="そろばん形式で数を表示" block="そろばん形式で数を表示 %n 表示位置 %s 桁数 %w"
     //% weight=50 blockGap=8
     export function showSorobanNumber(n: number, s: number = 0, w: number = 5): void {
         let wn = Math.abs(n)
