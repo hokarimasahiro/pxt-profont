@@ -20,7 +20,7 @@ namespace profont {
     //% weight=100 blockGap=8
     export function showString(pStr: string): void {
         const AlfaFont: string = "0    M    H0H  :O:O::MEG:IB49C:EE:1H    >A   A>   :4:  4>4  12   44   2    248  >A>  9O1  CE9  AE;  L4O  MEB  >E2  @CL  :E:  9E>  :    1:   4:A  ::   A:4  @E8  >AEB>?D?  OE:  >AA  OA>  OEA  OD@  >E6  O4O  AOA  2AN  O<C  O11  O8O  O>O  OAO  OD8  >C?  OD;  9EB  @O@  O1O  N1N  O2O  K4K  H7H  CEI  OA   842  AO   8@8  111  @8   7:7  O52  699  25O  >E9  4?D  9E:  O43  ;    11F  O25  N11  ?4?  ?87  696  ?:4  4:?  788  5=:  4?5  >1?  >1>  ?2?  969  =3<  ;=9  4OA  O    AO4  4848 0    "
-        const KanaFont: string = "0    252  N@@  11?  21   04   @EEN 8?:< 1278 4=6  575  56?4 4?46 5571 EEO  4524 4444 AFDH 44?@ <I>  AOA  9:O8 9N9> :O:  8ABL 4I>8 AAAO 8M9N8EE2L ABDJA8N9= @92L 9IFL 5END HI1N 5EF4 O42  99N8 1AA1 AEBM 9:K:=112L 1N0L3N999 AABL 6842 ;8O8;DBEH EEE1 3=A531:4J DOEE 8O:< AAO1 EEEO EEEF L11N O0O2 O124 OAAO HAAN AA2L HH   8D8  "
+        const KanaFont: string = "0    252  N@@  11?  21   04   @EEN 8?:< 1278 4=6  575  56?4 4?46 5571 EEO  4524 4444 AFDH 44?@ <I>  AOA  9:O8 9N9> :O:  8ABL 4I>8 AAAO 8M9N8EE2L ABDJA8N9= @92L 9IFL 5END HI1N 5EF4 O42  99N8 1AA1 AEBM 9:K:=112L 1N0L3N999 AABL 6842 ;8O8;DBEH EEE1 3=A531:4J DOEE 8O:< AAO1 EEEO EEEF L11N 1N0O2O124 OAAO HAAN AA2L HH   8D8  "
         const KanjiFont: string = "=G4G8OEO  1NDO 92L2956O:A9:O:95;O;519O91"
         let i: number; let j: number; let k: number
         let lines: number[] = []
