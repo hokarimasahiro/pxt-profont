@@ -10,7 +10,7 @@ namespace profont {
     }
     let rotate: number = 0
     let scroleSpeed: number = 200
-    let yose: number = -1
+    let yose: number = -1       //-1:left,0:center,1:right
     let kanaShift: number = 0	//0:Alfa,1:Kana,2:Kanji
     /**
      * TODO:文字列を表示する
@@ -228,7 +228,7 @@ namespace profont {
     //% blockId="set Yose" block="set Yose %y"
     //% weight=86 blockGap=8
     export function setYose(y: number): void {
-        yose = 1
+        yose = y
     }
     /**
      * TODO:文字シフトを変更する
