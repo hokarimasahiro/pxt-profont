@@ -16,7 +16,7 @@ namespace profont {
      * TODO:文字列を表示する
      * @param pStr 文字列。, eg: "ABCDabcd"
      */
-    //% blockId="show String" block="show String %pStr"
+//    //% blockId="show String" block="show String %pStr"
     //% weight=100 blockGap=8
     export function showString(pStr: string): void {
         const AlfaFont: string = "0    M    H0H  :O:O::MEG:IB49C:EE:1H    >A   A>   :4:  4>4  12   44   2    248  >A>  9O1  CE9  AE;  L4O  MEB  >E2  @CL  :E:  9E>  :    1:   4:A  ::   A:4  @E8  >AEB>?D?  OE:  >AA  OA>  OEA  OD@  >E6  O4O  AOA  2AN  O<C  O11  O8O  O>O  OAO  OD8  >C?  OD;  9EB  @O@  O1O  N1N  O2O  K4K  H7H  CEI  OA   842  AO   8@8  111  @8   7:7  O52  699  25O  >E9  4?D  9E:  O43  ;    11F  O25  N11  ?4?  ?87  696  ?:4  4:?  788  5=:  4?5  >1?  >1>  ?2?  969  =3<  ;=9  4OA  O    AO4  4848 0    "
