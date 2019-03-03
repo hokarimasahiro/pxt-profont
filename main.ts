@@ -277,7 +277,7 @@ namespace profont {
      * TODO:カナシフトコード
      */
     //% blockId="カタカナ" block="カタカナ"
-    //% weight=80 blockGap=8
+    //% weight=78 blockGap=8
     export function shiftKana(): string {
         return "\v"
     }
@@ -285,7 +285,7 @@ namespace profont {
      * TODO:漢字シフトコード
      */
     //% blockId="shiftKanji" block="shiftKanji"
-    //% weight=78 blockGap=8
+    //% weight=76 blockGap=8
     function shiftKanji(): string {
         return "\f"
     }
