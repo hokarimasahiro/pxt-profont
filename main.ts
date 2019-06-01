@@ -204,6 +204,40 @@ namespace profont {
         }
     }
     /**
+     * TODO:１列表示する
+     * @param n 表示データ。, eg: 0x01001
+     */
+    //% blockId="１列表示する" block="１列表示する %n"
+    //% weight=88 blockGap=8
+    function display1line(n: number): void {
+        if ((n <= -5) || (n >= 5)) {
+            basic.clearScreen()
+            return
+        } else if (n == 0) {
+            return
+        } else if (n < 0) {
+            for (let i = 0; i <= 5 + n; i++) {
+                for (let j = 0; j < 5; j++) {
+                    if (led.point(i - n, j)) {
+                        led.plot(i, j)
+                    } else {
+                        led.unplot(i, j)
+                    }
+                }
+            }
+        } else {
+            for (let i = 4; i >= (n - 1); i--) {
+                for (let j = 0; j < 5; j++) {
+                    if (led.point(i - n, j)) {
+                        led.plot(i, j)
+                    } else {
+                        led.unplot(i, j)
+                    }
+                }
+            }
+        }
+    }
+    /**
      * TODO:回転方向を設定する
      * @param r 数値。, eg: -90
      */
