@@ -1,3 +1,12 @@
 // tests go here; this will not be compiled when this package is used as a library
 profont.setYose(-1)
 profont.showString("Y")
+basic.pause(500)
+profont.setRotatation(0)
+profont.showString("abc")
+profont.setRotatation(1)
+profont.showString("abc")
+profont.setRotatation(2)
+profont.showString("abc")
+profont.setRotatation(3)
+profont.showString("abc")

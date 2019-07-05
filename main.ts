@@ -286,7 +286,7 @@ namespace profont {
     }
     /**
      * TODO:回転方向を設定する
-     * @param r 数値。, eg: -90
+     * @param r 数値。, eg: left
      */
     //% blockId="回転方向" block="回転方向 %r"
     //% weight=90 blockGap=8
