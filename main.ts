@@ -2,23 +2,13 @@
  * Propotional Font Display blocks
  */
 //% weight=100 color=#0fbc11 icon="\u270f" block="Proportional Font"
-declare const enum lotate {
-    // block=top
-    normal = 0,
-    // block=left
-    left = 1,
-    // block=under
-    under=2,
-    // block=right
-    right=3
-}
 namespace profont {
     declare const enum mojiSHift {
         Alfa = 0,
         Kana = 1,
         Kanji = 2
     }
-    let rotate: number = 0
+    let rotate: number = 0      // 0:top,1:left,2:under,3:right
     let scroleSpeed: number = 200
     let yose: number = -1       //-1:left,0:center,1:right
     let kanaShift: number = 0	//0:Alfa,1:Kana,2:Kanji
@@ -247,19 +237,21 @@ namespace profont {
             }
         }
     }
-    function plot(x: number, y: number): void {
+    export function plot(x: number, y: number): void {
         switch (rotate) {
             case 0:
                 led.plot(x, y); break;
             case 1:
-                led.plot(y, 4 -x); break;
+                led.plot(y, 4 - x); break;
             case 2:
-                led.plot(4 -x, 4 -y); break;
+                led.plot(4 - x, 4 - y); break;
             case 3:
                 led.plot(4 - y, x); break;
+            default:
+                led.plot(x, y); break;
         }
     }
-    function unplot(x: number, y: number): void {
+    export function unplot(x: number, y: number): void {
         switch (rotate) {
             case 0:
                 led.unplot(x, y); break;
@@ -269,9 +261,11 @@ namespace profont {
                 led.unplot(4 - x, 4 - y); break;
             case 3:
                 led.unplot(4 - y, x); break;
+            default:
+                led.unplot(x, y); break;
         }
     }
-    function point(x: number, y: number): boolean {
+    export function point(x: number, y: number): boolean {
         switch (rotate) {
             case 0:
                 return led.point(x, y)
@@ -281,6 +275,8 @@ namespace profont {
                 return led.point(4 - x, 4 - y)
             case 3:
                 return led.point(4 - y, x)
+            default:
+                return led.point(x, y)
         }
         return false
     }
