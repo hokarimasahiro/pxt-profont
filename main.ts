@@ -2,6 +2,16 @@
  * Propotional Font Display blocks
  */
 //% weight=100 color=#0fbc11 icon="\u270f" block="Proportional Font"
+declare const enum lotate {
+    // block=top
+    normal = 0,
+    // block=left
+    left = 1,
+    // block=under
+    under=2,
+    // block=right
+    right=3
+}
 namespace profont {
     declare const enum mojiSHift {
         Alfa = 0,
@@ -75,8 +85,8 @@ namespace profont {
             basic.clearScreen()
             for (i = 0; i < lines.length; i++) {
                 for (j = 0; j < 5; j++) {
-                    if ((lines[i] >>> (4 - j) & 0x01) != 0) led.plot(i, j)
-                    else led.unplot(i, j)
+                    if ((lines[i] >>> (4 - j) & 0x01) != 0) plot(i, j)
+                    else unplot(i, j)
                 }
             }
         } else {
@@ -84,8 +94,8 @@ namespace profont {
             for (i = 0; i < lines.length; i++) {
                 scrollScreen(-1)
                 for (j = 0; j < 5; j++) {
-                    if ((lines[i] >>> (4 - j) & 0x01) != 0) led.plot(4, j)
-                    else led.unplot(4, j)
+                    if ((lines[i] >>> (4 - j) & 0x01) != 0) plot(4, j)
+                    else unplot(4, j)
                 }
                 basic.pause(scroleSpeed)
             }
@@ -184,20 +194,20 @@ namespace profont {
         } else if (n < 0) {
             for (let i = 0; i <= 5 + n; i++) {
                 for (let j = 0; j < 5; j++) {
-                    if (led.point(i - n, j)) {
-                        led.plot(i, j)
+                    if (point(i - n, j)) {
+                        plot(i, j)
                     } else {
-                        led.unplot(i, j)
+                        unplot(i, j)
                     }
                 }
             }
         } else {
             for (let i = 4; i >= (n - 1); i--) {
                 for (let j = 0; j < 5; j++) {
-                    if (led.point(i - n, j)) {
-                        led.plot(i, j)
+                    if (point(i - n, j)) {
+                        plot(i, j)
                     } else {
-                        led.unplot(i, j)
+                        unplot(i, j)
                     }
                 }
             }
@@ -218,24 +228,61 @@ namespace profont {
         } else if (n < 0) {
             for (let i = 0; i <= 5 + n; i++) {
                 for (let j = 0; j < 5; j++) {
-                    if (led.point(i - n, j)) {
-                        led.plot(i, j)
+                    if (point(i - n, j)) {
+                        plot(i, j)
                     } else {
-                        led.unplot(i, j)
+                        unplot(i, j)
                     }
                 }
             }
         } else {
             for (let i = 4; i >= (n - 1); i--) {
                 for (let j = 0; j < 5; j++) {
-                    if (led.point(i - n, j)) {
-                        led.plot(i, j)
+                    if (point(i - n, j)) {
+                        plot(i, j)
                     } else {
-                        led.unplot(i, j)
+                        unplot(i, j)
                     }
                 }
             }
         }
+    }
+    function plot(x: number, y: number): void {
+        switch (rotate) {
+            case 0:
+                led.plot(x, y); break;
+            case 1:
+                led.plot(y, 4 -x); break;
+            case 2:
+                led.plot(4 -x, 4 -y); break;
+            case 3:
+                led.plot(4 - y, x); break;
+        }
+    }
+    function unplot(x: number, y: number): void {
+        switch (rotate) {
+            case 0:
+                led.unplot(x, y); break;
+            case 1:
+                led.unplot(y, 4 - x); break;
+            case 2:
+                led.unplot(4 - x, 4 - y); break;
+            case 3:
+                led.unplot(4 - y, x); break;
+        }
+    }
+    function point(x: number, y: number): boolean {
+        switch (rotate) {
+            case 0:
+                return led.point(x, y)
+            case 1:
+                return led.point(y, 4 - x)
+            case 2:
+                return led.point(4 - x, 4 - y)
+            case 3:
+                return led.point(4 - y, x)
+        }
+        return false
     }
     /**
      * TODO:回転方向を設定する
