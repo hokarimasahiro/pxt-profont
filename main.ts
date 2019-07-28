@@ -377,39 +377,39 @@ namespace profont {
         let dfont: number
         let wn = Math.abs(n)
         if (wn > 99) {
-            led.plot(0, 0)
+            plot(0, 0)
             return
         }
-        led.unplot(2, 0)
-        led.unplot(2, 1)
+        unplot(2, 0)
+        unplot(2, 1)
         if (n < 0) led.plot(2, 2); else led.unplot(2, 2);
-        led.unplot(2, 3)
-        led.unplot(2, 4)
+        unplot(2, 3)
+        unplot(2, 4)
 
         dfont = font[Math.trunc(wn / 10)]
         for (let i = 0; i < 5; i++) {
             if ((dfont >> (9 - i) & 0x01) == 0x01) {
-                led.plot(0, i)
+                plot(0, i)
             } else {
-                led.unplot(0, i)
+                unplot(0, i)
             }
             if ((dfont >> (4 - i) & 0x01) == 0x01) {
-                led.plot(1, i)
+                plot(1, i)
             } else {
-                led.unplot(1, i)
+                unplot(1, i)
             }
         }
         dfont = font[wn % 10]
         for (let i = 0; i < 5; i++) {
             if ((dfont >> (9 - i) & 0x01) == 0x01) {
-                led.plot(3, i)
+                plot(3, i)
             } else {
-                led.unplot(3, i)
+                unplot(3, i)
             }
             if ((dfont >> (4 - i) & 0x01) == 0x01) {
-                led.plot(4, i)
+                plot(4, i)
             } else {
-                led.unplot(4, i)
+                unplot(4, i)
             }
         }
     }
@@ -426,36 +426,19 @@ namespace profont {
         for (let i = s + w - 1; i >= s; i--) {
             let d = wn % 10
             if (wn == 0) {
-                led.unplot(i, 0)
-                led.unplot(i, 1)
-                if (n <= 0) led.plot(i, 2); else led.unplot(i, 2);
-                led.unplot(i, 3)
-                led.unplot(i, 4)
+                unplot(i, 0)
+                unplot(i, 1)
+                if (n <= 0) plot(i, 2); else unplot(i, 2);
+                unplot(i, 3)
+                unplot(i, 4)
             } else {
-                if (d >= 5) led.plot(i, 0); else led.unplot(i, 0);
+                if (d >= 5) plot(i, 0); else unplot(i, 0);
                 d = d % 5
-                if (d >= 4) led.plot(i, 1); else led.unplot(i, 1)
-                if (d >= 3) led.plot(i, 2); else led.unplot(i, 2)
-                if (d >= 2) led.plot(i, 3); else led.unplot(i, 3)
-                if (d >= 1) led.plot(i, 4); else led.unplot(i, 4)
+                if (d >= 4) plot(i, 1); else unplot(i, 1)
+                if (d >= 3) plot(i, 2); else unplot(i, 2)
+                if (d >= 2) plot(i, 3); else unplot(i, 3)
+                if (d >= 1) plot(i, 4); else unplot(i, 4)
                 wn = Math.trunc(wn / 10)
-            }
-        }
-    }
-    /**
-     * TODO:数値を16進形式で表示する
-     * @param n 数値。, eg: 0xab30
-     */
-    //% blockId="16進形式で数を表示" block="16進形式で数を表示 %n"
-    //% weight=40 blockGap=8
-    export function showHex(n: number): void {
-        for (let x = 0; x < 5; x++) {
-            for (let y = 0; y < 4; y++) {
-                if ((n & 1 << (x * 4 + y)) != 0) {
-                    led.plot(4 - y, 4 - x)
-                } else {
-                    led.unplot(4 - y, 4 - x)
-                }
             }
         }
     }
