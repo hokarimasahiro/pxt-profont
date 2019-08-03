@@ -2,6 +2,16 @@
  * Propotional Font Display blocks
  */
 //% weight=100 color=#0fbc11 icon="\u270f" block="Proportional Font"
+enum rotate{
+    //% block="top"
+    top =0,
+    //% block="left"
+    left=1,
+    //% block="under"
+    under=2,
+    //% block="right"
+    right=3
+}
 namespace profont {
     declare const enum mojiSHift {
         Alfa = 0,
@@ -303,11 +313,11 @@ namespace profont {
     }
     /**
      * TODO:回転方向を設定する
-     * @param r 数値。, eg: left
+     * @param r rotate。, eg: left
      */
     //% blockId="回転方向" block="回転方向 %r"
     //% weight=90 blockGap=8
-    export function setRotatation(r: number): void {
+    export function setRotatation(r: rotate): void {
         rotate = r
     }
     /**
