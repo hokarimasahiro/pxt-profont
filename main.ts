@@ -237,6 +237,13 @@ namespace profont {
             }
         }
     }
+    /**
+     * TODO:LEDを点ける
+     * @param x x座標。, eg: 1
+     * @param y y座標。, eg: 3
+     */
+    //% blockId="plot" block="plot %x %y"
+    //% weight=88 blockGap=8
     export function plot(x: number, y: number): void {
         switch (rotate) {
             case 0:
@@ -251,6 +258,13 @@ namespace profont {
                 led.plot(x, y); break;
         }
     }
+    /**
+     * TODO:LEDを消す
+     * @param x x座標。, eg: 1
+     * @param y y座標。, eg: 3
+     */
+    //% blockId="unplot" block="unplot %x %y"
+    //% weight=88 blockGap=8
     export function unplot(x: number, y: number): void {
         switch (rotate) {
             case 0:
@@ -265,6 +279,13 @@ namespace profont {
                 led.unplot(x, y); break;
         }
     }
+    /**
+     * TODO:LEDの状態を取り出す
+     * @param x x座標。, eg: 1
+     * @param y y座標。, eg: 3
+     */
+    //% blockId="point" block="point %x %y"
+    //% weight=88 blockGap=8
     export function point(x: number, y: number): boolean {
         switch (rotate) {
             case 0:
