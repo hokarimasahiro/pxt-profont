@@ -1,7 +1,6 @@
 /**
  * Propotional Font Display blocks
  */
-//% weight=100 color=#0fbc11 icon="\u270f" block="Proportional Font"
 enum rotate{
     //% block="top"
     top =0,
@@ -12,6 +11,7 @@ enum rotate{
     //% block="right"
     right=3
 }
+//% weight=100 color=#0fbc11 icon="\u270f" block="Proportional Font"
 namespace profont {
     declare const enum mojiSHift {
         Alfa = 0,
