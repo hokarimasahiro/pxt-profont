@@ -7,7 +7,9 @@
     },
     "files": [
         "README.md",
-        "main.ts"
+        "profont.ts",
+        "shims.d.ts",
+        "font.cpp"
     ],
     "testFiles": [
         "test.ts"
