@@ -1,5 +1,5 @@
 basic.forever(function () {
-    profont.setYose(-1)
+/*    profont.setYose(-1)
     profont.showString("Y")
     basic.pause(500)
     profont.setRotatation(0)
@@ -12,6 +12,9 @@ basic.forever(function () {
     profont.showString("abc")
     basic.pause(500)
     profont.setRotatation(3)
-    profont.showString("abc")
+    profont.showString("abc")*/
+
+    profont.showString("A")
     basic.pause(500)
+
 })
