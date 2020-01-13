@@ -37,11 +37,11 @@ namespace profont {
     let scroleSpeed: number = 200
     let yose: number = -1       //-1:left,0:center,1:right
     let kanaShift: number = 0	//0:Alfa,1:Kana,2:Kanji
-    function getFont(charCode: number): string {
+    function getFont(charCode: number): number {
 
         let fontNum: number
         let fontStr: string
-        basic.showNumber(charCode);
+
         if ((charCode >= 0x20) && (charCode <= 0x5f))
             fontNum = getAlph(charCode - 0x20);
         else if ((kanaShift == mojiSHift.Alfa) && (charCode >= 0x60) && (charCode <= 0x7e))
@@ -51,19 +51,9 @@ namespace profont {
         else if ((kanaShift == mojiSHift.Kanji) && (charCode >= 0x60) && (charCode <= 0x6f))
             fontNum = getKanji(charCode - 0x60);
         else
-            return "";
-        basic.showNumber(fontNum);
+            return -1;
 
-        if(fontNum==0){
-            fontStr="";
-        } else{
-            fontStr = "";
-            for (let k = 0; fontNum >= Math.pow(32, k); k++) {
-                fontStr = String.fromCharCode(Math.trunc(fontNum / Math.pow(32, k)) % 32 + 0x30) + fontStr
-    basic.showNumber(Math.trunc(fontNum / Math.pow(32, k)) % 32);
-            }
-        }
-        return fontStr;
+        return fontNum;
     }
     /**
      * TODO:文字列を表示する
@@ -75,19 +65,27 @@ namespace profont {
         let i: number; let j: number; let k: number
         let lines: number[] = []
         let charCode: number
-        let Font: string
+        let font: number
+        let fontWidth: number
 
         for (i = 0; i < pStr.length; i++) {
             charCode = pStr.charCodeAt(i) & 0xff
-            Font = getFont(charCode)
-            if (Font != "") {
+            font = getFont(charCode)
+            if (font != -1) {
+                if (font == 0) fontWidth = 1;
+                if ((font & (0x1ffffff << 5)) == 0) fontWidth = 1;
+                else if ((font & (0x1ffffff << 10)) == 0) fontWidth = 2;
+                else if ((font & (0x1ffffff << 15)) == 0) fontWidth = 3;
+                else if ((font & (0x1ffffff << 5)) == 0) fontWidth = 4;
+                else fontWidth = 5;
+
                 if (pStr.length == 1) {
-                    if (Font.length < 5 && yose != -1) {
+                    if (fontWidth < 5 && yose != -1) {
                         if (yose == 0) {
-                            if (Font.length < 4) lines.push(0)
-                            if (Font.length < 2) lines.push(0)
+                            if (fontWidth < 4) lines.push(0)
+                            if (fontWidth < 2) lines.push(0)
                         } else {
-                            for (k = 5; k > Font.length; k--) {
+                            for (k = 5; k > fontWidth; k--) {
                                 lines.push(0)
                             }
                         }
@@ -95,8 +93,8 @@ namespace profont {
                 } else {
                     if ((charCode != 0x9e) && (charCode != 0x9f)) lines.push(0);
                 }
-                for (k = 0; k < Font.length; k++) {
-                    lines.push(Font.charCodeAt(k) - 0x30)
+                for (k = 0; k < fontWidth; k++) {
+                    lines.push((font >> (((fontWidth - 1) - k) * 5)) & 0x1f)
                 }
             } else {
                 switch (pStr.charCodeAt(i)) {
